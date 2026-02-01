@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111827"/>
+  <title>SAT Vocab Trainer</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">SAT</div>
+      <div class="titles">
+        <div class="title">Vocab Trainer</div>
+        <div class="subtitle" id="subtitle">Loading…</div>
+      </div>
+    </div>
+
+    <nav class="tabs" role="tablist" aria-label="Modes">
+      <button class="tab active" data-view="study" role="tab" aria-selected="true">Study</button>
+      <button class="tab" data-view="quiz" role="tab" aria-selected="false">Quiz</button>
+      <button class="tab" data-view="list" role="tab" aria-selected="false">Search</button>
+      <button class="tab" data-view="stats" role="tab" aria-selected="false">Stats</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- STUDY -->
+    <section id="view-study" class="view active">
+      <div class="card">
+        <div class="card-top">
+          <div class="word" id="study-word">—</div>
+          <div class="meta" id="study-meta">—</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="card-body">
+          <div class="hint">Tap “Show” (or press Space) to reveal.</div>
+          <div class="definition" id="study-definition" hidden></div>
+          <div class="example" id="study-example" hidden></div>
+        </div>
+
+        <div class="card-actions">
+          <button class="btn" id="btn-show">Show</button>
+
+          <div class="rate" id="rate-buttons" hidden>
+            <button class="btn danger" data-grade="0">Again</button>
+            <button class="btn" data-grade="2">Hard</button>
+            <button class="btn" data-grade="3">Good</button>
+            <button class="btn good" data-grade="4">Easy</button>
+          </div>
+
+          <button class="btn ghost" id="btn-fav" title="Favorite">☆</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="row">
+          <label class="label">Deck</label>
+          <select id="deck-filter">
+            <option value="due">Due now (spaced repetition)</option>
+            <option value="all">All cards (random)</option>
+            <option value="favs">Favorites</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label class="label">Daily goal</label>
+          <input id="daily-goal" type="number" min="5" max="200" step="5" value="30"/>
+          <button class="btn small" id="btn-reset-today">Reset today</button>
+        </div>
+
+        <div class="row subtle">
+          <span id="due-count">—</span>
+          <span>•</span>
+          <span id="today-count">—</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="view-quiz" class="view">
+      <div class="panel">
+        <div class="row">
+          <label class="label">Quiz type</label>
+          <select id="quiz-type">
+            <option value="mc">Multiple choice (definition)</option>
+            <option value="typed">Typed (definition)</option>
+          </select>
+          <button class="btn" id="btn-new-question">New question</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="word" id="quiz-word">—</div>
+          <div class="meta" id="quiz-meta">—</div>
+        </div>
+        <div class="divider"></div>
+
+        <div class="card-body" id="quiz-body"></div>
+
+        <div class="card-actions">
+          <button class="btn ghost" id="btn-quiz-fav">☆</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEARCH/LIST -->
+    <section id="view-list" class="view">
+      <div class="panel">
+        <div class="row">
+          <input id="search" class="search" placeholder="Search word or definition… (e.g., 'abate', 'greed')" />
+          <button class="btn small" id="btn-clear">Clear</button>
+        </div>
+        <div class="row">
+          <label class="label">Show</label>
+          <select id="list-filter">
+            <option value="all">All</option>
+            <option value="favs">Favorites</option>
+            <option value="due">Due</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="results" class="results"></div>
+    </section>
+
+    <!-- STATS -->
+    <section id="view-stats" class="view">
+      <div class="panel">
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-num" id="stat-total">—</div>
+            <div class="stat-label">Total cards</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" id="stat-favs">—</div>
+            <div class="stat-label">Favorites</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" id="stat-due">—</div>
+            <div class="stat-label">Due now</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" id="stat-studied">—</div>
+            <div class="stat-label">Studied today</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="row">
+          <button class="btn danger" id="btn-reset-all">Reset ALL progress</button>
+          <span class="tiny">This clears schedules + favorites.</span>
+        </div>
+      </div>
+
+      <div class="panel tiny">
+        Works offline after first load. Add to Home Screen for an app-like experience.
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer tiny">
+    Data from your uploaded SAT vocab PDF.
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
