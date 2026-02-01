@@ -27,7 +27,7 @@ body{
 }
 .brand{display:flex; gap:12px; align-items:center; margin-bottom:10px}
 .logo{
-  width:44px; height:44px; border-radius:12px;
+  width:75px; height:44px; border-radius:12px;
   display:grid; place-items:center;
   background: linear-gradient(135deg, rgba(59,130,246,.9), rgba(16,185,129,.8));
   font-weight:800; letter-spacing:.5px;
